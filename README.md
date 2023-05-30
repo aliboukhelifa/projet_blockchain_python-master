@@ -1,33 +1,26 @@
 # Spécification du Composant HMACSHA512 en C++ et Python
 
 ## Auteurs
-Mehdi EL AYADI, Yufei Liu, Qilian Gu
+Ali BOUKHELIFA 
 
 ## Historique des versions
 | Version | Date       | Description                 |
 |---------|------------|-----------------------------|
-| 1.0     | 26/05/2023 | Première version du document|
+| 1.0     | 29/05/2023 | version initiale|
 
 ## Description
 
 ### Contexte
-Le composant HMACSHA512 est un module de cryptographie qui fournit une fonction de hachage cryptographique pour la sécurité des données. Il est basé sur l'algorithme HMAC (Hash-based Message Authentication Code) et utilise SHA512 comme fonction de hachage sous-jacente.
+Le composant HMACSHA512 implémente la fonction de hachage HMAC-SHA512 (Hash-based Message Authentication Code using SHA-512) en Python. Cette fonction permet de générer un code d'authentification de message en utilisant une clé secrète et l'algorithme de hachage SHA-512.
 
 ### En détails : 
 
-HMACSHA512 est un algorithme de hachage utilisé pour l'authentification de messages. Il est basé sur l'algorithme cryptographique SHA-512. HMAC signifie "Hash-based Message Authentication Code". C'est une construction spécifique utilisée pour créer une fonction de hachage de message, qui peut être utilisée pour vérifier à la fois l'intégrité des données et l'authenticité.
-
-L'algorithme HMACSHA512 combine une **clé secrète** avec le message à hacher pour produire un code d'authentification de message (*MAC - Message authentication code*). Ce MAC peut ensuite être utilisé pour vérifier que le message n'a pas été altéré pendant le transport et que le message provient bien de l'expéditeur prévu.
-
-Les cas d'utilisation typiques de HMACSHA512 comprennent :
-
-- **Authentification de messages** : HMACSHA512 peut être utilisé pour garantir que les messages envoyés sur un réseau n'ont pas été falsifiés. Le destinataire du message peut utiliser le MAC pour vérifier l'intégrité du message.
-
-- **Signature de tokens** : Dans les systèmes d'authentification basés sur des tokens, comme JWT (JSON Web Tokens), HMACSHA512 peut être utilisé pour signer le token. Cela garantit que le token n'a pas été modifié après sa création.
-
-- **Protection des données sensibles** : HMACSHA512 peut être utilisé pour vérifier l'intégrité des données sensibles, comme les mots de passe. En stockant le MAC d'un mot de passe plutôt que le mot de passe lui-même, vous pouvez vérifier un mot de passe sans risquer de le divulguer.
-
-Ce document décrit la spécification d'un composant basé sur l'algorithme HMACSHA512. Ce composant est destiné à être utilisé dans des applications nécessitant une authentification de messages codés en C++ et Python.
+Ce composant est utilisé dans les systèmes de sécurité et de vérification d'intégrité des données. Il peut être utilisé pour vérifier l'authenticité d'un message et détecter toute altération ou manipulation.
+Schéma bloc incluant les composants connexes: [Vous pouvez fournir un schéma bloc décrivant la place du composant HMACSHA512 dans le système ou l'architecture globale.]
+Interface et interaction avec chaque autre composant: Le composant HMACSHA512 peut être utilisé indépendamment des autres composants. Il prend en entrée un message et une clé secrète, et renvoie le code d'authentification HMAC-SHA512 correspondant.
+Résumé: Déclarations de fonctions Python d'interface et leurs arguments:
+Fonction generate_hmac_sha512(message: bytes, key: bytes) -> bytes: Cette fonction prend un message (sous forme de bytes) et une clé secrète (sous forme de bytes) en entrée, et renvoie le code d'authentification HMAC-SHA512 correspondant (sous forme de bytes).
+Cas d'erreurs: Le composant peut générer une exception Python en cas d'erreur, par exemple, si le message ou la clé sont de mauvais types, ou si une erreur se produit lors du calcul du code d'authentification.
 
 ### Schéma bloc incluant les composants connexes
 ```
@@ -35,62 +28,64 @@ Ce document décrit la spécification d'un composant basé sur l'algorithme HMAC
 ```
 L'application interagit avec le composant HMACSHA512, qui à son tour utilise le composant SHA512.
 
-### Interface et interaction avec chaque autre composant
-L'interface du composant HMACSHA512 est conçue pour être simple et directe. Elle fournit une fonction `hmac_sha512(key, message)` qui prend une clé et un message en entrée, et renvoie le hachage HMACSHA512 du message.
+### Que fait le composant HMACSHA512 ?
+Le composant HMACSHA512 implémente la fonction de hachage HMAC-SHA512 en utilisant l'algorithme de hachage SHA-512. Cette fonction permet de générer un code d'authentification de message en utilisant une clé secrète. Le code d'authentification HMAC-SHA512 est utilisé pour vérifier l'authenticité et l'intégrité des données.
 
-### Résumé: déclarations de fonctions python d’interface et leurs arguments
-```python
-def hmac_sha512(key: bytes, message: bytes) -> bytes:
+Quelles sont ses interfaces ?
+Le composant HMACSHA512 expose une interface sous la forme d'une fonction Python:
+def generate_hmac_sha512(message: bytes, key: bytes) -> bytes:
     """
-    Calcule le HMACSHA512 du message avec la clé donnée.
+    Génère le code d'authentification HMAC-SHA512 pour un message donné et une clé secrète.
 
-    Args:
-        key (bytes): La clé utilisée pour le hachage.
-        message (bytes): Le message à hacher.
+    Arguments:
+    - message: Le message à authentifier, sous forme de bytes.
+    - key: La clé secrète utilisée pour l'authentification, sous forme de bytes.
 
-    Returns:
-        bytes: Le hachage HMACSHA512 du message.
+    Retourne:
+    Le code d'authentification HMAC-SHA512, sous forme de bytes.
     """
-```
+
 
 ### Cas d’erreurs
-Si la clé ou le message ne sont pas de type `bytes`, une `TypeError` sera levée. Si la clé est vide, une `ValueError` sera levée.
+Le composant HMACSHA512 peut générer des exceptions Python dans les situations suivantes:
+Si le message ou la clé fournis ne sont pas de type bytes, une exception de type TypeError sera levée. Vous pouvez gérer cette exception en vérifiant le type des arguments avant de les utiliser.
+Si une erreur se produit lors du calcul du code d'authentification, une exception de type Exception sera levée. Vous pouvez gérer cette exception en affichant un message d'erreur approprié ou en propageant l'exception vers le niveau supérieur.
 
 ## Test
 
 ### Plan de test
-Nous testerons la fonction `hmac_sha512` avec différentes clés et messages, y compris des cas limites comme une clé vide ou un message vide. Nous vérifierons que la fonction renvoie le bon hachage et qu'elle lève les exceptions appropriées en cas d'erreur.
+Pour tester le composant HMACSHA512, vous pouvez suivre les étapes suivantes:
+Importez le composant dans votre programme de test.
+Utilisez la fonction generate_hmac_sha512() avec différents jeux de données de test pour générer les codes d'authentification HMAC-SHA512.
+Comparez les résultats obtenus avec des valeurs de référence pour vérifier si les codes d'authentification sont corrects.
+Affichez le résultat du test (passé ou échoué) pour chaque jeu de données de test.
 
 ### Programme de test
 ```python
-def test_hmac_sha512():
-    # Test avec des valeurs valides
-    key = b"secret"
-    message = b"Hello, World!"
-    assert hmac_sha512(key, message) == b'\x9b\x61\x...'
+import hmac
+import hashlib
 
-    # Test avec une clé vide
-    try:
-        hmac_sha512(b'', message)
-    except ValueError:
-        pass
-    else:
-        assert False, "Expected ValueError for empty key"
+def generate_hmac_sha512(message: bytes, key: bytes) -> bytes:
+    return hmac.new(key, message, hashlib.sha512).digest()
 
-    # Test avec un type de clé invalide
-    try:
-        hmac_sha512("not bytes", message)
-    except TypeError:
-        pass
-    else:
-        assert False, "Expected TypeError for key of wrong type"
+# Test cases
+test_cases = [
+    {
+        'message': b'Hello, world!',
+        'key': b'secret_key',
+        'expected_hmac': b'\x04\x82K\xfc\x11N#\x98\xe4\x97\x05d\xdb\xb1x\x80\xc2\xd7\xe4a2r+\x90\xff\xabI#\x05\xec\xe1\x9d\xd5\xf0\xcc\x04\xc9L\x8eJ\xe0\x82\xa3\x9f\x84\xeb\x14V\xd5\xe7d\x1e\x90',
+    },
+    # Add more test cases here
+]
 
-    # Test avec un type de message invalide
-    try:
-        hmac_sha512(key, "not bytes")
-    except TypeError:
-        pass
+# Run the tests
+for i, test_case in enumerate(test_cases):
+    hmac_result = generate_hmac_sha512(test_case['message'], test_case['key'])
+    if hmac_result == test_case['expected_hmac']:
+        print(f"Test case {i+1}: Passed")
     else:
-        assert False, "Expected TypeError for message of wrong type"
+        print(f"Test case {i+1}: Failed")
+
+
 ```
 Pour exécuter les tests, utilisez simplement la commande `python -m test test_hmac_sha512`.
