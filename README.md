@@ -7,6 +7,8 @@ Ali BOUKHELIFA
 | Version | Date       | Description                 |
 |---------|------------|-----------------------------|
 | 1.0     | 29/05/2023 | version initiale|
+|---------|------------|-----------------------------|
+| 1.1     | 28/06/2023 | Update mode d'emploi et test|
 
 ## Description
 
