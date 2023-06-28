@@ -11,6 +11,8 @@ namespace py = pybind11;
  * @returns: A hexadecimal string representation of the HMAC-SHA512 digest.
  * @throws std::invalid_argument: If the key is empty.
  */
+
+// clé et data en héxadécimal 
 std::string hmac_sha512(const std::string& key, const std::string& data) {
     if (key.empty()) {
         throw std::invalid_argument("Key cannot be empty");
