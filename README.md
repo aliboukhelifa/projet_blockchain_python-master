@@ -60,6 +60,11 @@ Utilisez la fonction generate_hmac_sha512() avec différents jeux de données de
 Comparez les résultats obtenus avec des valeurs de référence pour vérifier si les codes d'authentification sont corrects.
 Affichez le résultat du test (passé ou échoué) pour chaque jeu de données de test.
 
+On peut aussi tester la fonction en utilisant différents cas de test :       
+            Des données d'entrée valides avec une clé secrète valide.
+            Des données d'entrée vides avec une clé secrète valide.
+            Des données d'entrée valides avec une clé secrète vide.
+
 ### Programme de test
 ```python
 import hmac
@@ -88,4 +93,6 @@ for i, test_case in enumerate(test_cases):
 
 
 ```
-Pour exécuter les tests, utilisez simplement la commande `python -m test test_hmac_sha512`.
+### Mode d'emploi
+Pour exécuter les tests, utilisez simplement la commande `python -m test test_hmac_sha512`. 
+Après avoir définit les données d'entrée et la clé secrète, on appelle la fonction hmac_sha512 en fournissant les données et la clé secrète en tant qu'arguments.
