@@ -7,13 +7,12 @@ Ali BOUKHELIFA
 | Version | Date       | Description                 |
 |---------|------------|-----------------------------|
 | 1.0     | 29/05/2023 | version initiale|
-|---------|------------|-----------------------------|
 | 1.1     | 28/06/2023 | Update mode d'emploi et test|
 
 ## Description
 
 ### Contexte
-Le composant HMACSHA512 implémente la fonction de hachage HMAC-SHA512 (Hash-based Message Authentication Code using SHA-512) en Python. Cette fonction permet de générer un code d'authentification de message en utilisant une clé secrète et l'algorithme de hachage SHA-512.
+Le composant HMACSHA512 implémente la fonction de hachage HMAC-SHA512 (Hash-based Message Authentication Code using SHA-512). Cette fonction permet de générer un code d'authentification de message en utilisant une clé secrète et l'algorithme de hachage SHA-512.
 
 ### En détails : 
 
