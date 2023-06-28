@@ -7,13 +7,12 @@ Ali BOUKHELIFA
 | Version | Date       | Description                 |
 |---------|------------|-----------------------------|
 | 1.0     | 29/05/2023 | version initiale|
-|---------|------------|-----------------------------|
 | 1.1     | 28/06/2023 | Update mode d'emploi et test|
 
 ## Description
 
 ### Contexte
-Le composant HMACSHA512 implémente la fonction de hachage HMAC-SHA512 (Hash-based Message Authentication Code using SHA-512) en Python. Cette fonction permet de générer un code d'authentification de message en utilisant une clé secrète et l'algorithme de hachage SHA-512.
+Le composant HMACSHA512 implémente la fonction de hachage HMAC-SHA512 (Hash-based Message Authentication Code using SHA-512). Cette fonction permet de générer un code d'authentification de message en utilisant une clé secrète et l'algorithme de hachage SHA-512.
 
 ### En détails : 
 
@@ -52,7 +51,7 @@ def generate_hmac_sha512(message: bytes, key: bytes) -> bytes:
 
 
 ### Cas d’erreurs
-Le composant HMACSHA512 peut générer des exceptions Python dans les situations suivantes:
+Le composant HMACSHA512 peut générer des exceptions dans les situations suivantes:
 Si le message ou la clé fournis ne sont pas de type bytes, une exception de type TypeError sera levée. Vous pouvez gérer cette exception en vérifiant le type des arguments avant de les utiliser.
 Si une erreur se produit lors du calcul du code d'authentification, une exception de type Exception sera levée. Vous pouvez gérer cette exception en affichant un message d'erreur approprié ou en propageant l'exception vers le niveau supérieur.
 - On exige d'avoir une chaine héxadécimal commençant par 0x sinon générer une erreur. 
